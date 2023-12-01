@@ -2,3 +2,4 @@ node_modules
 /prisma/*.db
 /.idea
 .env.local
+.env
