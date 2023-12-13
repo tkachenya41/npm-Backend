@@ -1,11 +1,11 @@
-import { prisma } from '@/model/prisma';
-import { errorCode } from '@/utils/utils';
-import { DBError } from '@/utils/custom-error';
-import { User } from '@prisma/client';
-import { userService } from '@/services/userService';
+import { prisma } from "@/model/prisma";
+import { errorCode } from "@/utils/utils";
+import { DBError } from "@/utils/custom-error";
+import { User } from "@prisma/client";
+import { userService } from "@/services/userService";
 
 export const userRepository = {
-  getById: async (id: number) => {
+  getById: async (id: User["id"]) => {
     const user = await prisma.user.findUnique({
       where: { id: id },
     });
@@ -21,7 +21,7 @@ export const userRepository = {
     return users;
   },
 
-  create: async (body: Omit<User, 'id'>) => {
+  create: async (body: Omit<User, "id">) => {
     const hashPassword = await userService.hashPassword(body.password);
     try {
       const user = await prisma.user.create({
@@ -36,12 +36,12 @@ export const userRepository = {
     } catch (err) {
       throw new DBError(
         `Something went wrong with DataBase, probably using existing 'email' property`,
-        errorCode.INTERNAL_SERVER_ERROR,
+        errorCode.INTERNAL_SERVER_ERROR
       );
     }
   },
 
-  update: async (body: Omit<User, 'id' | 'role'> & { id?: number }) => {
+  update: async (body: Omit<User, "role">) => {
     try {
       const hashPassword = await userService.hashPassword(body.password);
       const user = await prisma.user.update({
@@ -57,11 +57,11 @@ export const userRepository = {
 
       return user;
     } catch {
-      throw new DBError('User not found', errorCode.NOT_FOUND);
+      throw new DBError("User not found", errorCode.NOT_FOUND);
     }
   },
 
-  delete: async (id: number) => {
+  delete: async (id: User["id"]) => {
     try {
       const user = await prisma.user.delete({
         where: { id: id },
@@ -73,13 +73,13 @@ export const userRepository = {
     }
   },
 
-  findByEmail: async (email: string) => {
+  findByEmail: async (email: User["email"]) => {
     const existedUser = await prisma.user.findFirst({
       where: { email: email },
     });
 
     if (!existedUser) {
-      throw new DBError('User not found', errorCode.NOT_FOUND);
+      throw new DBError("User not found", errorCode.NOT_FOUND);
     }
 
     return existedUser;
