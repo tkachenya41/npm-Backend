@@ -19,20 +19,5 @@ export const checkAdmin = async (c: Context, next: Next) => {
   return next();
 };
 
-export const CheckUser = async (c: Context, next: Next) => {
-  const payload = c.get("jwtPayload");
-
-  const user = await userRepository.findByEmail(payload.email);
-
-  if (user.role !== roles.USER && roles.ADMIN) {
-    throw new AuthError(
-      "You are not allowed to this route",
-      errorCode.FORBIDDEN
-    );
-  }
-
-  return next();
-};
-
 export const validateRegistration = zValidator("json", UserBodySchema);
 export const validateSign = zValidator("json", SignSchema);

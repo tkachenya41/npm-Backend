@@ -7,11 +7,7 @@ export const authController = {
   login: async (c: SignContext) => {
     const { email, password } = c.req.valid("json");
 
-    const user = await userRepository.findByEmail(email);
-
-    await userService.verifyPassword(password, user.password);
-
-    const token = await authService.login(user);
+    const token = await authService.login(email, password);
 
     return c.text(token);
   },

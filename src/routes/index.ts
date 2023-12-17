@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { userRoutes } from "./user/userRoutes";
+import { cors } from "hono/cors";
 
 import {
   AuthErrorHandler,
@@ -11,6 +12,7 @@ import { authRoutes } from "./authRoutes";
 
 export const routes = new Hono();
 
+routes.use("*", cors());
 routes.onError(DBErrorHandler);
 routes.onError(ValidationErrorHandler);
 routes.onError(AuthErrorHandler);

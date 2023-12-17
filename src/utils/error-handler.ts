@@ -52,6 +52,7 @@ export function AuthErrorHandler(err: Error, c: Context) {
     }
   } else if (err instanceof HTTPException) {
     if (!err.getResponse().statusText) {
+      c.status(401);
       return c.json("Missing authorization... You need to sign in");
     }
     return c.json(err.getResponse().statusText);

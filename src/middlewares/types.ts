@@ -6,20 +6,20 @@ import {
   validateUserId,
 } from "./userValidation";
 
-export type validateUserBody = typeof validateUserBody;
-export type UserBodyContext = Parameters<validateUserBody>[0];
+export type UserBodyValidation = typeof validateUserBody;
+export type UserBodyContext = Parameters<UserBodyValidation>[0];
 
-export type validateUpdateUserBody = typeof validateUpdateUserBody;
-export type UpdateUserContext = Parameters<validateUpdateUserBody>[0];
+export type UpdateUserBodyValidation = typeof validateUpdateUserBody;
+export type UpdateUserContext = Parameters<UpdateUserBodyValidation>[0];
 
-export type validateId = typeof validateUserId;
-export type IdContextType = Parameters<validateId>[0];
+export type UserIdValidation = typeof validateUserId;
+export type IdContextType = Parameters<UserIdValidation>[0];
 
-export type validateSign = typeof validateSign;
-export type SignContext = Parameters<validateSign>[0];
+export type SignValidation = typeof validateSign;
+export type SignContext = Parameters<SignValidation>[0];
 
-export type validatePostBody = typeof validatePostBody;
-export type PostBodyContext = Parameters<validatePostBody>[0];
+export type PostBodyValidation = typeof validatePostBody;
+export type PostBodyContext = Parameters<PostBodyValidation>[0];
 
-export type validateUpdatePostBody = typeof validateUpdatePostBody;
-export type UpdatePostContext = Parameters<validateUpdatePostBody>[0];
+export type UpdatePostBodyValidation = typeof validateUpdatePostBody;
+export type UpdatePostContext = Parameters<UpdatePostBodyValidation>[0];
