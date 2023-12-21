@@ -41,7 +41,7 @@ export const userRepository = {
     }
   },
 
-  update: async (body: Omit<User, "role">) => {
+  update: async (body: User) => {
     try {
       const hashPassword = await userService.hashPassword(body.password);
       const user = await prisma.user.update({
@@ -52,6 +52,7 @@ export const userRepository = {
           email: body.email,
           password: hashPassword,
           name: body.name,
+          role: body.role,
         },
       });
 
