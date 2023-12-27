@@ -2,11 +2,16 @@ import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 
 export const postSwaggerRoute = new OpenAPIHono();
 
+const jwtSecurityScheme = {
+  jwt: [],
+};
+
 postSwaggerRoute.openapi(
   createRoute({
     method: "get",
     tags: ["post"],
     path: "/users/post",
+    security: [jwtSecurityScheme],
     responses: {
       200: {
         description: "get all posts",
@@ -29,10 +34,6 @@ postSwaggerRoute.openapi(
         title: "wjiofev",
         userId: 6,
       },
-      {
-        title: "wjiofev",
-        userId: 7,
-      },
     ]);
   }
 );
@@ -42,6 +43,7 @@ postSwaggerRoute.openapi(
     method: "get",
     tags: ["post"],
     path: "/users/post/{id}",
+    security: [jwtSecurityScheme],
     parameters: [
       {
         name: "id",
@@ -76,6 +78,7 @@ postSwaggerRoute.openapi(
     method: "post",
     tags: ["post"],
     path: "/users/post",
+    security: [jwtSecurityScheme],
     requestBody: {
       description: "post a user",
       content: {
@@ -121,6 +124,7 @@ postSwaggerRoute.openapi(
     method: "put",
     tags: ["post"],
     path: "/users/post",
+    security: [jwtSecurityScheme],
     requestBody: {
       description: "Update post with the help of 'id'",
       content: {
@@ -160,6 +164,7 @@ postSwaggerRoute.openapi(
     method: "delete",
     tags: ["post"],
     path: "/users/post/{id}]",
+    security: [jwtSecurityScheme],
     parameters: [
       {
         name: "id",

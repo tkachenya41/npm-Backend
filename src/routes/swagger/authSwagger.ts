@@ -6,7 +6,7 @@ authSwaggerRoute.openapi(
   createRoute({
     method: "post",
     tags: ["auth"],
-    path: "/sign",
+    path: "/auth/sign",
     requestBody: {
       description: "get a token",
       content: {
@@ -30,7 +30,7 @@ authSwaggerRoute.openapi(
     },
   }),
   (c) => {
-    return c.json("token");
+    return c.json("");
   }
 );
 
@@ -38,7 +38,7 @@ authSwaggerRoute.openapi(
   createRoute({
     method: "post",
     tags: ["auth"],
-    path: "/register",
+    path: "/auth/register",
     requestBody: {
       description: "register",
       content: {
@@ -65,6 +65,6 @@ authSwaggerRoute.openapi(
     },
   }),
   (c) => {
-    return c.json("You are successfully registered");
+    return c.json("");
   }
 );

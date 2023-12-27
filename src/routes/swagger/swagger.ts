@@ -17,6 +17,11 @@ swaggerRoute.get(
   })
 );
 
+swaggerRoute.openAPIRegistry.registerComponent("securitySchemes", "jwt", {
+  type: "http",
+  scheme: "bearer",
+});
+
 swaggerRoute.doc("/doc", {
   info: {
     title: "NodeJS API",

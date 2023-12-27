@@ -2,11 +2,16 @@ import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 
 export const userSwaggerRoute = new OpenAPIHono();
 
+const jwtSecurityScheme = {
+  jwt: [],
+};
+
 userSwaggerRoute.openapi(
   createRoute({
     method: "get",
     tags: ["users"],
     path: "/users",
+    security: [jwtSecurityScheme],
     responses: {
       200: {
         description: "get all users",
@@ -36,14 +41,6 @@ userSwaggerRoute.openapi(
           "$argoSfKFSJaAqg8UwKjHITxWYks$+ZmJ4ipqipeU8uFd/6v01DIzo4LzaVJtScFzw+eeet4",
         role: "USER",
       },
-      {
-        id: 1,
-        email: "khgj@gmail.com",
-        name: "Roman",
-        password:
-          "$argon2id$v=9ZVqZstqdSvr4LzyY$qQSJSC/4ya+yjJxEGzJLk5E71wYUps++uzGZXsoc6FU",
-        role: "USER",
-      },
     ]);
   }
 );
@@ -53,6 +50,7 @@ userSwaggerRoute.openapi(
     method: "get",
     tags: ["users"],
     path: "/users/{id}",
+    security: [jwtSecurityScheme],
     parameters: [
       {
         name: "id",
@@ -95,6 +93,7 @@ userSwaggerRoute.openapi(
     method: "post",
     tags: ["users"],
     path: "/users",
+    security: [jwtSecurityScheme],
     requestBody: {
       description: "post a user",
       content: {
@@ -143,6 +142,7 @@ userSwaggerRoute.openapi(
     method: "put",
     tags: ["users"],
     path: "/users",
+    security: [jwtSecurityScheme],
     requestBody: {
       description: "Update user with the help of 'id'",
       content: {
@@ -192,6 +192,7 @@ userSwaggerRoute.openapi(
     method: "delete",
     tags: ["users"],
     path: "/users/{id}]",
+    security: [jwtSecurityScheme],
     parameters: [
       {
         name: "id",
