@@ -85,6 +85,25 @@ export const userRepository = {
 
     return existedUser;
   },
+  register: async (body: Omit<User, "id" | "role">) => {
+    const hashPassword = await userService.hashPassword(body.password);
+    try {
+      const user = await prisma.user.create({
+        data: {
+          email: body.email,
+          name: body.name,
+          password: hashPassword,
+        },
+      });
+
+      return user;
+    } catch (err) {
+      throw new DBError(
+        `Something went wrong with DataBase, probably using existing 'email' property`,
+        errorCode.INTERNAL_SERVER_ERROR
+      );
+    }
+  },
 };
 
 export default userRepository;

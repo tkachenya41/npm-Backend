@@ -1,4 +1,4 @@
-import { validateSign } from "./authValidation";
+import { validateRegistration, validateSign } from "./authValidation";
 import { validatePostBody, validateUpdatePostBody } from "./postValidations";
 import {
   validateUpdateUserBody,
@@ -17,6 +17,9 @@ export type IdContextType = Parameters<UserIdValidation>[0];
 
 export type SignValidation = typeof validateSign;
 export type SignContext = Parameters<SignValidation>[0];
+
+export type RegisterValidation = typeof validateRegistration;
+export type RegisterContext = Parameters<RegisterValidation>[0];
 
 export type PostBodyValidation = typeof validatePostBody;
 export type PostBodyContext = Parameters<PostBodyValidation>[0];

@@ -26,6 +26,8 @@ export const UserBodySchema = UserUpdateSchema.omit({ id: true });
 
 export const SignSchema = UserBodySchema.pick({ email: true, password: true });
 
+export const RegisterSchema = UserBodySchema.omit({ role: true });
+
 export const PostBodySchema = z.object({
   user: UserBodySchema,
   posts: z.object({
