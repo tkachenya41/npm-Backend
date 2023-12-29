@@ -11,6 +11,16 @@ export const validateUserId = validator("param", (value: { id: string }) => {
   return { id: +value.id };
 });
 
+export const validateUserName = validator(
+  "query",
+  (value: { name: string }) => {
+    if (value.name === "") {
+      throw new ValidationError("You need to type name", errorCode.INVALID);
+    }
+    return { name: value.name };
+  }
+);
+
 export const validateUserBody = zValidator("json", UserBodySchema);
 
 export const validateUpdateUserBody = zValidator("json", UserUpdateSchema);

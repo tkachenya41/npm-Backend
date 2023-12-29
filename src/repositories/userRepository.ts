@@ -85,6 +85,17 @@ export const userRepository = {
 
     return existedUser;
   },
+  findByName: async (name: User["name"]) => {
+    const existedUser = await prisma.user.findMany({
+      where: { name: name },
+    });
+
+    if (!existedUser) {
+      throw new DBError("Users not found", errorCode.NOT_FOUND);
+    }
+
+    return existedUser;
+  },
   register: async (body: Omit<User, "id" | "role">) => {
     const hashPassword = await userService.hashPassword(body.password);
     try {

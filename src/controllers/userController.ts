@@ -2,6 +2,7 @@ import {
   UserBodyContext,
   IdContextType,
   UpdateUserContext,
+  NameContextType,
 } from "@/middlewares/types";
 import userRepository from "@/repositories/userRepository";
 import { Context } from "hono";
@@ -11,6 +12,12 @@ export const userController = {
     const { id } = c.req.valid("param");
     const userById = await userRepository.getById(id);
     return c.json(userById);
+  },
+
+  getByName: async (c: NameContextType) => {
+    const { name } = c.req.valid("query");
+    const users = await userRepository.findByName(name);
+    return c.json(users);
   },
 
   getAll: async (c: Context) => {
