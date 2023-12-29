@@ -8,8 +8,8 @@ import { Context } from "hono";
 
 export const postController = {
   create: async (c: PostBodyContext) => {
-    const { user, posts } = c.req.valid("json");
-    const post = await postRepository.create(user, posts);
+    const { user, posts, categories } = c.req.valid("json");
+    const post = await postRepository.create(user, posts, categories);
     return c.json(post);
   },
 

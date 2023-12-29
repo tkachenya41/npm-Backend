@@ -33,6 +33,9 @@ export const PostBodySchema = z.object({
   posts: z.object({
     title: z.string(),
   }),
+  categories: z.object({
+    name: z.string(),
+  }),
 });
 
 export const PostUpdateSchema = z.object({

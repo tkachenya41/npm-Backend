@@ -1,10 +1,14 @@
 import { prisma } from "@/model/prisma";
 import { DBError } from "@/utils/custom-error";
 import { errorCode } from "@/utils/utils";
-import { Post, User } from "@prisma/client";
+import { Category, Post, User } from "@prisma/client";
 
 export const postRepository = {
-  create: async (user: Omit<User, "id">, posts: Omit<Post, "userId">) => {
+  create: async (
+    user: Omit<User, "id">,
+    posts: Omit<Post, "userId">,
+    category: Omit<Category, "id">
+  ) => {
     const post = await prisma.post.create({
       data: {
         user: {
@@ -15,6 +19,11 @@ export const postRepository = {
           },
         },
         title: posts.title,
+        categories: {
+          create: {
+            name: category.name,
+          },
+        },
       },
     });
     return post;
@@ -31,7 +40,9 @@ export const postRepository = {
     return post;
   },
   getAll: async () => {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+      include: { categories: true },
+    });
     return posts;
   },
   delete: async (id: Post["userId"]) => {
