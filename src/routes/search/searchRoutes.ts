@@ -8,7 +8,7 @@ const secretKey = process.env.SECRET_KEY!;
 export const searchRoutes = new Hono();
 
 searchRoutes.use(
-  "/*",
+  "/",
   jwt({
     secret: secretKey,
   })

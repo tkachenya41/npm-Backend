@@ -16,6 +16,8 @@ export const authService = {
       email: user.email,
     };
 
-    return await sign(payload, secret);
+    const token = await sign(payload, secret);
+
+    return { token, user };
   },
 };
